@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
+    <color name="blue1">#1DAFAE</color>
+    <color name="blue2">#42D2DB</color>
+    <color name="blue3">#D4FEFA</color>
+    <color name="grey">#696969</color>
+    <color name="mtrl_textinput_default_box_stroke_color" >#99FFFFFF</color>
+    <color name="Green">#228B22</color>
+    <color name="black">#121212</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primary">#1D1D1F</color>
-    <color name="secondary">#3A5040</color>
-    <color name="color1">#178C8B</color>
+    <color name="active_color">#FFFFFFFF</color>
+    <color name="inactive_color">#bebebe</color>
+
 </resources>
+

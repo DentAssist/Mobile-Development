@@ -4,18 +4,21 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
+        android:iconTint="#bebebe"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:iconTint="#bebebe"
         android:icon="@drawable/baseline_history_24"
         android:title="@string/title_history" />
 
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_person"
+        android:iconTint="#bebebe"
         android:title="@string/title_profile" />
 
 </menu>

@@ -4,7 +4,7 @@ import com.barengsaya.dentassist.data.pref.UserModel
 import com.barengsaya.dentassist.data.pref.UserPreference
 import kotlinx.coroutines.flow.Flow
 
-class UserRepository private constructor(
+class Repository private constructor(
     private val userPreference: UserPreference
 ) {
 
@@ -22,12 +22,12 @@ class UserRepository private constructor(
 
     companion object {
         @Volatile
-        private var instance: UserRepository? = null
+        private var instance: Repository? = null
         fun getInstance(
             userPreference: UserPreference
-        ): UserRepository =
+        ): Repository =
             instance ?: synchronized(this) {
-                instance ?: UserRepository(userPreference)
+                instance ?: Repository(userPreference)
             }.also { instance = it }
     }
 }

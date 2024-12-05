@@ -5,11 +5,10 @@
     <string name="title_history">History</string>
     <string name="title_profile">Profile</string>
 
-    <string name="message_login_page">Selamat Datang Kembali 👋 </string>
     <string name="message_main_page">Selamat Datang.</string>
     <string name="punyaAkun">"Punya Akun? <b>Masuk</b>"</string>
     <string name="email">Email</string>
-    <string name="deskripsi_login_message">Ayo Segera Isi Datamu, dan Segera Cari tau Masalah Pada Mulutmu! 😊</string>
+    <string name="deskripsi_login_message">Selamat Datang Kembali 👋</string>
     <string name="masukkan_email">Masukkan Email...</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -19,5 +18,8 @@
     <string name="name">Name</string>
     <string name="masukkan_nama">Masukkan Nama...</string>
     <string name="C">© Bangkit Academy | C242-PS360</string>
+    <string name="user">"Hallo <b>Taufiq</b>"</string>
+
+    <string name="searchbar_hint">Cari Sesuatu...</string>
 
 </resources>
