@@ -7,6 +7,7 @@ import com.barengsaya.dentassist.data.Repository
 import com.barengsaya.dentassist.di.Injection
 import com.barengsaya.dentassist.view.login.LoginViewModel
 import com.barengsaya.dentassist.view.profile.ProfileViewModel
+import com.barengsaya.dentassist.view.signup.SignupViewModel
 
 class ViewModelFactory(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -19,6 +20,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             }
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
+                SignupViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
