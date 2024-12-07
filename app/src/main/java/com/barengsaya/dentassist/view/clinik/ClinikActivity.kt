@@ -1,4 +1,4 @@
-package com.barengsaya.dentassist.view
+package com.barengsaya.dentassist.view.clinik
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

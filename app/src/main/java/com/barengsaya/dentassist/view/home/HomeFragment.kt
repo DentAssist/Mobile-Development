@@ -11,12 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.barengsaya.dentassist.R
 import com.barengsaya.dentassist.databinding.FragmentHomeBinding
-import com.barengsaya.dentassist.view.AdapterSlider
-import com.barengsaya.dentassist.view.CameraActivity
-import com.barengsaya.dentassist.view.ClinikActivity
-import com.barengsaya.dentassist.view.ImageItem
-import com.barengsaya.dentassist.view.InformasiActivity
-import com.barengsaya.dentassist.view.ObatActivity
+import com.barengsaya.dentassist.view.adapter.AdapterSlider
+import com.barengsaya.dentassist.view.scan.CameraActivity
+import com.barengsaya.dentassist.view.clinik.ClinikActivity
+import com.barengsaya.dentassist.view.item.ImageItem
+import com.barengsaya.dentassist.view.informasi.InformasiActivity
+import com.barengsaya.dentassist.view.obat.ObatActivity
 import java.util.UUID
 
 class HomeFragment : Fragment() {

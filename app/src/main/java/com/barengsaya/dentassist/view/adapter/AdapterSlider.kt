@@ -1,4 +1,4 @@
-package com.barengsaya.dentassist.view
+package com.barengsaya.dentassist.view.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.barengsaya.dentassist.R
+import com.barengsaya.dentassist.view.item.ImageItem
 import com.bumptech.glide.Glide
 
 class AdapterSlider : ListAdapter<ImageItem, AdapterSlider.ViewHolder>(DiffCallback()){

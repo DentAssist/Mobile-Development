@@ -1,5 +1,6 @@
 package com.barengsaya.dentassist.view.profile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -12,7 +13,6 @@ class ProfileViewModel(private val repository: Repository) : ViewModel() {
     fun getSession(): LiveData<UserModel> {
         return repository.getSession().asLiveData()
     }
-
     fun logout() {
         viewModelScope.launch {
             repository.logout()

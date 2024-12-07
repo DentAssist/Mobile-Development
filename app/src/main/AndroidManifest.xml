@@ -15,16 +15,16 @@
         android:theme="@style/Theme.DentAssist"
         tools:targetApi="31">
         <activity
-            android:name=".view.CameraActivity"
+            android:name=".view.scan.CameraActivity"
             android:exported="false" />
         <activity
-            android:name=".view.InformasiActivity"
+            android:name=".view.informasi.InformasiActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ObatActivity"
+            android:name=".view.obat.ObatActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ClinikActivity"
+            android:name=".view.clinik.ClinikActivity"
             android:exported="false" />
         <activity
             android:name=".view.splash.SplashActivity"

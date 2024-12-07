@@ -1,4 +1,4 @@
-package com.barengsaya.dentassist.view
+package com.barengsaya.dentassist.view.item
 
 data class ImageItem(
     val id : String,

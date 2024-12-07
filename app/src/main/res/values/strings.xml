@@ -19,6 +19,8 @@
     <string name="masukkan_nama">Masukkan Nama...</string>
     <string name="C">© Bangkit Academy | C242-PS360</string>
     <string name="user">"Hallo <b>Taufiq</b>"</string>
+    <string name="akurasi_label">Akurasi</string>
+    <string name="persen">%d%%</string>
 
     <string name="searchbar_hint">Cari Sesuatu...</string>
 

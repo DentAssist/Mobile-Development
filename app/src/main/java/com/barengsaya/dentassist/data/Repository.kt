@@ -1,6 +1,8 @@
 package com.barengsaya.dentassist.data
 
+import com.barengsaya.dentassist.data.api.request.LoginRequest
 import com.barengsaya.dentassist.data.api.request.SignupRequest
+import com.barengsaya.dentassist.data.api.response.LoginResponse
 import com.barengsaya.dentassist.data.api.response.SignupResponse
 import com.barengsaya.dentassist.data.api.retrofit.ApiService
 import com.barengsaya.dentassist.data.pref.UserModel
@@ -23,6 +25,10 @@ class Repository private constructor(
     suspend fun signup(username: String, email: String, password: String): SignupResponse {
         val request = SignupRequest(username, email, password)
         return apiService.signup(request)
+    }
+    suspend fun login(email: String, password: String): LoginResponse {
+        val request = LoginRequest(email, password)
+        return apiService.login(request)
     }
 
     suspend fun logout() {
