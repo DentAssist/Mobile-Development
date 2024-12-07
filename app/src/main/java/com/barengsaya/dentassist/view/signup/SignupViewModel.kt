@@ -19,11 +19,11 @@ class SignupViewModel(private val repository: Repository) : ViewModel() {
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
 
-    fun signup(username: String, email: String, password: String) {
+    fun signup(username: String, email: String, password: String, city: String) {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                val response = repository.signup(username, email, password)
+                val response = repository.signup(username, email, password, city)
                 _signupResult.value = response
             } catch (e: retrofit2.HttpException) {
                 val errorBody = e.response()?.errorBody()?.string()

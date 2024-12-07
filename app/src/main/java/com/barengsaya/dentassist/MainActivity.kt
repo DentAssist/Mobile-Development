@@ -1,6 +1,7 @@
 package com.barengsaya.dentassist
 
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -11,8 +12,15 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    fun setBottomNavVisibility(visible: Boolean) {
+        val navView = findViewById<BottomNavigationView>(R.id.nav_view)
+        navView.visibility = if (visible) View.VISIBLE else View.GONE
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -72,20 +72,23 @@ class HomeFragment : Fragment() {
         }
     }
 
+
+
     private fun setupViewPager() {
         val imageList = arrayListOf(
             ImageItem(
                 UUID.randomUUID().toString(),
-                "https://res.cloudinary.com/dk0z4ums3/image/upload/v1652143049/attached_image/sariawan-0-alodokter.jpg"
+                getString(R.string.https_img_antaranews_com_cache_1200x800_2018_11_kunir_jpg_webp)
             ),
             ImageItem(
                 UUID.randomUUID().toString(),
-                "https://res.cloudinary.com/dk0z4ums3/image/upload/v1652143049/attached_image/sariawan-0-alodokter.jpg"
+                getString(R.string.https_res_cloudinary_com_dk0z4ums3_image_upload_v1708999329_attached_image_bentuk_gigi_normal_dan_tips_menjaga_kesehatannya_0_alodokter_jpg)
             ),
+
             ImageItem(
                 UUID.randomUUID().toString(),
-                "https://res.cloudinary.com/dk0z4ums3/image/upload/v1652143049/attached_image/sariawan-0-alodokter.jpg"
-            )
+                getString(R.string.https_img_cdn_medkomtek_com_isnmni_jhczvdymt_d2nwov6kv8_730x411_smart_filters_quality_100_format_webp_article_epb6t_faes9wetzvxrmsf_original_030227300_1520847207_berbagai_kondisi_rongga_mulut_yang_tidak_boleh_anda_abaikan_by_irina_bg_shutterstock_jpg_w_128_q_100)
+            ),
         )
 
         val adapterSlider = AdapterSlider()

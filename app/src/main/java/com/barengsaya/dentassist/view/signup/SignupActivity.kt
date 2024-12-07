@@ -47,8 +47,9 @@ class SignupActivity : AppCompatActivity() {
             val username = binding.nameEditText.text.toString().trim()
             val email = binding.emailEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
+            val city = binding.kotaEditText.text.toString().trim()
 
-            if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty() || city.isEmpty()) {
                 Toast.makeText(this, "Semua kolom harus diisi!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -67,7 +68,7 @@ class SignupActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            signupViewModel.signup(username, email, password)
+            signupViewModel.signup(username, email, password, city)
         }
     }
 

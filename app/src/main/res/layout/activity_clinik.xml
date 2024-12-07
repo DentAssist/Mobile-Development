@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".view.clinik.ClinikActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -25,6 +26,14 @@
             app:titleCentered="true"
             />
     </com.google.android.material.appbar.AppBarLayout>
+    <View
+        android:id="@+id/garis"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/material_on_surface_stroke"
+        app:layout_constraintTop_toBottomOf="@id/layoutTopAppBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
     <!-- SearchBar -->
     <com.google.android.material.search.SearchBar
         android:id="@+id/searchBar"

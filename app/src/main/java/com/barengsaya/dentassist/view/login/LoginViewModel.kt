@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.barengsaya.dentassist.data.api.response.LoginResponse
+import com.barengsaya.dentassist.data.api.response.SignupResponse
 
 
 class LoginViewModel(private val repository: Repository) : ViewModel() {
@@ -34,8 +35,21 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
                     )
                 )
                 _loginResult.value = response
+            }catch (e: retrofit2.HttpException) {
+                val errorBody = e.response()?.errorBody()?.string()
+                if (errorBody != null) {
+                    try {
+                        val gson = com.google.gson.Gson()
+                        val errorResponse = gson.fromJson(errorBody, LoginResponse::class.java)
+                        _errorMessage.value = errorResponse.message ?: "Kesalahan tidak diketahui"
+                    } catch (ex: Exception) {
+                        _errorMessage.value = "Kesalahan tidak diketahui"
+                    }
+                } else {
+                    _errorMessage.value = "Kesalahan tidak diketahui"
+                }
             } catch (e: Exception) {
-                _errorMessage.value = (e.message ?: "Terjadi kesalahan")
+                _errorMessage.value = e.message ?: "Terjadi kesalahan"
             } finally {
                 _isLoading.value = false
             }

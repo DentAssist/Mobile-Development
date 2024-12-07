@@ -22,8 +22,8 @@ class Repository private constructor(
         return userPreference.getSession()
     }
 
-    suspend fun signup(username: String, email: String, password: String): SignupResponse {
-        val request = SignupRequest(username, email, password)
+    suspend fun signup(username: String, email: String, password: String, city: String): SignupResponse {
+        val request = SignupRequest(username, email, password, city)
         return apiService.signup(request)
     }
     suspend fun login(email: String, password: String): LoginResponse {

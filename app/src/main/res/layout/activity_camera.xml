@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".view.scan.CameraActivity">
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
@@ -15,6 +16,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/layoutTopAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/back_button"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back_button"
+            app:title="Camera Scan"
+            app:titleCentered="true"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+    <View
+        android:id="@+id/garis"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/material_on_surface_stroke"
+        app:layout_constraintTop_toBottomOf="@id/layoutTopAppBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/previewImageView"

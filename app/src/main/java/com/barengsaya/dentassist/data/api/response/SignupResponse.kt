@@ -8,5 +8,8 @@ data class SignupResponse(
 	val message: String? = null,
 
 	@field:SerializedName("status")
-	val status: String? = null
+	val status: String? = null,
+
+	@field:SerializedName("city")
+	val city: String?= null
 )
