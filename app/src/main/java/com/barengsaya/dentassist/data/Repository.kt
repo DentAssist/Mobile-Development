@@ -2,8 +2,10 @@ package com.barengsaya.dentassist.data
 
 import com.barengsaya.dentassist.data.api.request.LoginRequest
 import com.barengsaya.dentassist.data.api.request.SignupRequest
+import com.barengsaya.dentassist.data.api.request.UpdateUserRequest
 import com.barengsaya.dentassist.data.api.response.LoginResponse
 import com.barengsaya.dentassist.data.api.response.SignupResponse
+import com.barengsaya.dentassist.data.api.response.UserResponse
 import com.barengsaya.dentassist.data.api.retrofit.ApiService
 import com.barengsaya.dentassist.data.pref.UserModel
 import com.barengsaya.dentassist.data.pref.UserPreference
@@ -30,6 +32,23 @@ class Repository private constructor(
         val request = LoginRequest(email, password)
         return apiService.login(request)
     }
+
+    suspend fun getUserProfile(idUser: String): UserResponse {
+        return apiService.user(idUser)
+    }
+
+    suspend fun updateUserProfile(
+        idUser: String,
+        username: String,
+        email: String,
+        city: String,
+    ): UserResponse {
+        val request = UpdateUserRequest(username, email,city)
+        return apiService.updateUserProfile(idUser, request)
+    }
+
+
+
 
     suspend fun logout() {
         userPreference.logout()

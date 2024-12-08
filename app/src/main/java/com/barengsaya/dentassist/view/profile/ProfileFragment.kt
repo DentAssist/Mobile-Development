@@ -14,12 +14,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.barengsaya.dentassist.R
+import com.barengsaya.dentassist.data.api.response.Data
 import com.barengsaya.dentassist.databinding.FragmentProfileBinding
 import com.barengsaya.dentassist.view.welcome.WelcomeActivity
 import com.barengsaya.dentassist.view.ViewModelFactory
+import com.bumptech.glide.Glide
 
 @Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
@@ -51,17 +55,62 @@ class ProfileFragment : Fragment() {
         binding.ftProfile.setOnClickListener {
             showImagePickerOptions()
         }
-
+        binding.progressBar.visibility = View.VISIBLE
         viewModel.getSession().observe(viewLifecycleOwner) { user ->
             if (!user.isLogin) {
                 startActivity(Intent(requireContext(), WelcomeActivity::class.java))
                 activity?.finish()
+            } else {
+                viewModel.fetchUserProfile(user.idUser)
+            }
+        }
+
+        viewModel.userProfile.observe(viewLifecycleOwner) { response ->
+            response.data?.let { data ->
+                updateUI(data)
+            }
+            binding.progressBar.visibility = View.GONE
+        }
+
+        binding.simpanButton.setOnClickListener {
+            val username = binding.nameEditText.text.toString()
+            val email = binding.emailEditText.text.toString()
+            val city = binding.cityEditText.text.toString()
+
+            if (username.isEmpty() || email.isEmpty() || city.isEmpty()) {
+                Toast.makeText(requireContext(), "Semua data harus diisi", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            binding.progressBar.visibility = View.VISIBLE
+
+            viewModel.getSession().observe(viewLifecycleOwner) { user ->
+                viewModel.updateUserProfile(user.idUser, username, email, city)
+
+                viewModel.userProfile.observe(viewLifecycleOwner) {
+                    Toast.makeText(requireContext(), "Profil berhasil diperbarui", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
+                }
             }
         }
 
         setupView()
         setupAction()
     }
+
+
+    private fun updateUI(data: Data) {
+        binding.nameEditText.setText(data.username)
+        binding.emailEditText.setText(data.email)
+        binding.cityEditText.setText(data.city)
+
+        Glide.with(this)
+            .load(data.profileImage)
+            .placeholder(R.drawable.profile_default)
+            .into(binding.ftProfile)
+    }
+
+
 
     private fun showImagePickerOptions() {
         val options = arrayOf("Ambil Foto", "Pilih dari Galeri")

@@ -7,7 +7,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="view.home.HomeFragment">
 
-    <!-- Profile Section -->
     <LinearLayout
         android:id="@+id/profileSection"
         android:layout_width="0dp"
@@ -25,11 +24,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical">
-            <!-- Profile Image -->
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImage"
+                android:id="@+id/userprofile"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/profile_default"
@@ -39,10 +37,17 @@
 
             <!-- Greeting and Name -->
             <TextView
-                android:id="@+id/userGreeting"
+                android:id="@+id/hello"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hello, Taufiqurrohman!"
+                android:text="Hello, "
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
@@ -121,7 +126,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Row 1 -->
         <LinearLayout
             android:id="@+id/row1"
             android:layout_width="match_parent"
@@ -177,7 +181,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Row 2 -->
         <LinearLayout
             android:id="@+id/row2"
             android:layout_width="match_parent"
@@ -234,4 +237,14 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

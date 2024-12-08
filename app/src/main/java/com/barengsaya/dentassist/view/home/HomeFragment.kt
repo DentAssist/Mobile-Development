@@ -8,21 +8,26 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.barengsaya.dentassist.R
 import com.barengsaya.dentassist.databinding.FragmentHomeBinding
+import com.barengsaya.dentassist.view.ViewModelFactory
 import com.barengsaya.dentassist.view.adapter.AdapterSlider
 import com.barengsaya.dentassist.view.scan.CameraActivity
 import com.barengsaya.dentassist.view.clinik.ClinikActivity
 import com.barengsaya.dentassist.view.item.ImageItem
 import com.barengsaya.dentassist.view.informasi.InformasiActivity
 import com.barengsaya.dentassist.view.obat.ObatActivity
+import com.barengsaya.dentassist.view.welcome.WelcomeActivity
+import com.bumptech.glide.Glide
 import java.util.UUID
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private val homeViewModel: HomeViewModel by viewModels { ViewModelFactory.getInstance(requireContext()) }
 
     private lateinit var pageChangeListener: ViewPager2.OnPageChangeCallback
     private val params = ViewGroup.MarginLayoutParams(
@@ -43,6 +48,19 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        observeViewModel()
+
+        homeViewModel.getSession().observe(viewLifecycleOwner) { user ->
+            binding.progressBar.visibility = View.VISIBLE // Tampilkan ProgressBar
+            if (user.isLogin) {
+                homeViewModel.fetchUserProfile(user.idUser)
+            } else {
+                // Handle jika user tidak login
+                startActivity(Intent(requireContext(), WelcomeActivity::class.java))
+                activity?.finish()
+            }
+        }
 
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
@@ -72,7 +90,18 @@ class HomeFragment : Fragment() {
         }
     }
 
-
+    private fun observeViewModel() {
+        homeViewModel.userProfile.observe(viewLifecycleOwner) { userResponse ->
+            userResponse?.data?.let { userData ->
+                binding.username.text = getString(R.string.username, userData.username)
+                Glide.with(this)
+                    .load(userData.profileImage)
+                    .placeholder(R.drawable.profile_default)
+                    .into(binding.userprofile)
+            }
+            binding.progressBar.visibility = View.GONE
+        }
+    }
 
     private fun setupViewPager() {
         val imageList = arrayListOf(

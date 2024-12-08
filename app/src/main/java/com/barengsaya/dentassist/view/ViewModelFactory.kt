@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.barengsaya.dentassist.data.Repository
 import com.barengsaya.dentassist.di.Injection
+import com.barengsaya.dentassist.view.home.HomeViewModel
 import com.barengsaya.dentassist.view.login.LoginViewModel
 import com.barengsaya.dentassist.view.profile.ProfileViewModel
 import com.barengsaya.dentassist.view.signup.SignupViewModel
@@ -17,6 +18,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
 
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(repository) as T
             }
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(repository) as T
