@@ -11,20 +11,25 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.barengsaya.dentassist.databinding.ActivityCameraBinding
+import com.yalantis.ucrop.UCrop
+import com.yalantis.ucrop.UCropActivity
+import java.io.File
+import java.util.UUID
 
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
 
     private var currentImageUri: Uri? = null
+    private var croppedImageUri: Uri? = null
 
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
-                Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Permission granted", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -57,7 +62,7 @@ class CameraActivity : AppCompatActivity() {
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
-            showImage()
+            launchImageCrop(uri)
         } else {
             Log.d("Photo Picker", "No media selected")
         }
@@ -72,13 +77,48 @@ class CameraActivity : AppCompatActivity() {
         ActivityResultContracts.TakePicture()
     ) { isSuccess ->
         if (isSuccess) {
-            showImage()
+            currentImageUri?.let { uri ->
+                launchImageCrop(uri)
+            }
         }
     }
 
-    private fun showImage() {
-        currentImageUri?.let {
-            Log.d("Image URI", "showImage: $it")
+    private fun launchImageCrop(uri: Uri) {
+        val destinationUri = Uri.fromFile(File(cacheDir, "${UUID.randomUUID()}.jpg"))
+        val options = UCrop.Options().apply {
+            setAllowedGestures(UCropActivity.SCALE, UCropActivity.NONE, UCropActivity.SCALE)
+            setToolbarTitle("Crop Image")
+            setFreeStyleCropEnabled(true)
+            setToolbarColor(ContextCompat.getColor(this@CameraActivity, android.R.color.white))
+            setStatusBarColor(ContextCompat.getColor(this@CameraActivity, android.R.color.white))
+            setActiveControlsWidgetColor(ContextCompat.getColor(this@CameraActivity, android.R.color.white))
+        }
+
+        UCrop.of(uri, destinationUri)
+            .withOptions(options)
+            .withAspectRatio(1f, 1f)
+            .withMaxResultSize(1080, 1080)
+            .start(this)
+    }
+
+    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: android.content.Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
+            val resultUri: Uri? = UCrop.getOutput(data!!)
+            if (resultUri != null) {
+                croppedImageUri = resultUri
+                showCroppedImage()
+            }
+        } else if (requestCode == UCrop.RESULT_ERROR) {
+            val cropError: Throwable? = UCrop.getError(data!!)
+            cropError?.let { Log.e("UCrop Error", it.message ?: "Unknown error") }
+        }
+    }
+
+    private fun showCroppedImage() {
+        croppedImageUri?.let {
             binding.previewImageView.setImageURI(it)
         }
     }

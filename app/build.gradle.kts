@@ -79,4 +79,8 @@ dependencies {
 
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
+    implementation ("com.github.yalantis:ucrop:2.2.8")
+    implementation ("io.coil-kt:coil:0.13.0")
+
+
 }
