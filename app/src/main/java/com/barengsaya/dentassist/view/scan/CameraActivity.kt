@@ -1,6 +1,7 @@
 package com.barengsaya.dentassist.view.scan
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -10,14 +11,28 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.barengsaya.dentassist.data.pref.UserPreference
+import com.barengsaya.dentassist.data.pref.dataStore
 import com.barengsaya.dentassist.databinding.ActivityCameraBinding
+import com.barengsaya.dentassist.di.Injection
+import com.barengsaya.dentassist.view.ViewModelFactory
+import com.barengsaya.dentassist.view.predict.PredictActivity
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropActivity
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.util.UUID
 
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
+    private lateinit var viewModel: CameraViewModel
+
 
     private var currentImageUri: Uri? = null
     private var croppedImageUri: Uri? = null
@@ -43,6 +58,22 @@ class CameraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val repository = Injection.provideRepository(this)
+        val factory = ViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory)[CameraViewModel::class.java]
+
+        viewModel.predictResult.observe(this) { result ->
+            result.onSuccess { response ->
+                val intent = Intent(this, PredictActivity::class.java)
+                intent.putExtra("PREDICT_RESULT", response.data)
+                startActivity(intent)
+            }
+            result.onFailure { error ->
+                Toast.makeText(this, "Upload gagal: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
@@ -102,7 +133,7 @@ class CameraActivity : AppCompatActivity() {
     }
 
     @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: android.content.Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
@@ -124,8 +155,26 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun uploadImage() {
-        Toast.makeText(this, "Fitur ini belum tersedia", Toast.LENGTH_SHORT).show()
+        if (croppedImageUri != null) {
+            val file = File(croppedImageUri!!.path!!)
+            val requestFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val imageBody = MultipartBody.Part.createFormData("image", file.name, requestFile)
+
+            val userPreference = UserPreference.getInstance(dataStore)
+            lifecycleScope.launch {
+                userPreference.getSession().collect { userModel ->
+                    val idUserRequestBody = userModel.idUser.toRequestBody("text/plain".toMediaTypeOrNull())
+
+                    // Call predict API
+                    viewModel.predict(imageBody, idUserRequestBody)
+                }
+            }
+        } else {
+            Toast.makeText(this, "Pilih gambar terlebih dahulu!", Toast.LENGTH_SHORT).show()
+        }
     }
+
+
 
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA

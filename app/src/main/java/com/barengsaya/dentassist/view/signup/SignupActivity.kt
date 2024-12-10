@@ -76,7 +76,6 @@ class SignupActivity : AppCompatActivity() {
     private fun observeViewModel() {
         signupViewModel.signupResult.observe(this) { response ->
             if (response != null) {
-                // Tampilkan dialog sukses
                 AlertDialog.Builder(this).apply {
                     setTitle("Yeah!")
                     setMessage(response.message ?: "Pendaftaran berhasil! Silahkan login.")

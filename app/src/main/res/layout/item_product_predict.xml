@@ -6,15 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    app:cardUseCompatPadding="true"
-    >
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/gambar_obat"
+            android:id="@+id/product_image"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_alignParentStart="true"
@@ -27,35 +27,40 @@
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/jenis_obat"
+            android:id="@+id/product_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:gravity="start"
-            android:maxLines="1"
-            tools:text="Jenis obat"
+            android:maxLines="2"
+            android:text="Nama Product"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/gambar_obat"
+            app:layout_constraintStart_toEndOf="@+id/product_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tanggal"
-            android:layout_width="wrap_content"
+            android:id="@+id/product_harga"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="208dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:text="Product Harga"
             android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="06/12/2024" />
-
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/product_image"
+            app:layout_constraintTop_toBottomOf="@id/product_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

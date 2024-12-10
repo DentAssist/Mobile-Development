@@ -52,11 +52,10 @@ class HomeFragment : Fragment() {
         observeViewModel()
 
         homeViewModel.getSession().observe(viewLifecycleOwner) { user ->
-            binding.progressBar.visibility = View.VISIBLE // Tampilkan ProgressBar
+            binding.progressBar.visibility = View.VISIBLE
             if (user.isLogin) {
                 homeViewModel.fetchUserProfile(user.idUser)
             } else {
-                // Handle jika user tidak login
                 startActivity(Intent(requireContext(), WelcomeActivity::class.java))
                 activity?.finish()
             }
