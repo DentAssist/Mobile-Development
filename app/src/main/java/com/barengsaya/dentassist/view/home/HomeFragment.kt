@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
                 startActivity(Intent(requireContext(), WelcomeActivity::class.java))
                 activity?.finish()
             }
-        }
+        }k
 
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
