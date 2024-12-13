@@ -36,7 +36,7 @@ class HistoryFragment : Fragment() {
 
         userPreference = UserPreference.getInstance(requireContext().dataStore)
 
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireContext())).get(HistoryViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireContext()))[HistoryViewModel::class.java]
 
         adapter = HistoryAdapter()
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())

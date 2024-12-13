@@ -9,8 +9,12 @@ import com.barengsaya.dentassist.databinding.ItemProductPredictBinding
 import com.bumptech.glide.Glide
 
 class PredictProductAdapter(
-    private val products: List<ProductsItem>
+    products: List<ProductsItem>
 ) : RecyclerView.Adapter<PredictProductAdapter.ProductViewHolder>() {
+
+    private val filteredProducts = products.filter {
+        !it.name.isNullOrEmpty() && it.price != null && !it.linkPhoto.isNullOrEmpty()
+    }
 
     class ProductViewHolder(private val binding: ItemProductPredictBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -37,9 +41,9 @@ class PredictProductAdapter(
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val product = products[position]
+        val product = filteredProducts[position]
         holder.bind(product)
     }
 
-    override fun getItemCount() = products.size
+    override fun getItemCount() = filteredProducts.size
 }

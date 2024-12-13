@@ -95,7 +95,7 @@
                 android:layout_marginTop="45dp"
                 android:textStyle="bold"
                 android:layout_marginHorizontal="3dp"
-                android:text="Klinik mulut yang disarankan untuk Anda:"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 />
@@ -113,7 +113,7 @@
                 android:layout_marginTop="45dp"
                 android:textStyle="bold"
                 android:layout_marginHorizontal="3dp"
-                android:text="Produk yang mungkin cocok untuk Anda:"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 />
@@ -126,13 +126,13 @@
                 />
 
             <TextView
-                android:id="@+id/predict_suggest"
+                android:id="@+id/title_article"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
                 android:textStyle="bold"
                 android:layout_marginHorizontal="3dp"
-                android:text="Artikel terkait dengan penyakit Anda:"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 />

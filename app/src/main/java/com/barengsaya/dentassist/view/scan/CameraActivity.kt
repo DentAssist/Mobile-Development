@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.barengsaya.dentassist.MainActivity
 import com.barengsaya.dentassist.data.pref.UserPreference
 import com.barengsaya.dentassist.data.pref.dataStore
 import com.barengsaya.dentassist.databinding.ActivityCameraBinding
@@ -29,6 +30,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.util.UUID
 
+@Suppress("DEPRECATION")
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
     private lateinit var viewModel: CameraViewModel
@@ -58,6 +60,9 @@ class CameraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.backButton.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
         val repository = Injection.provideRepository(this)
         val factory = ViewModelFactory(repository)
@@ -174,7 +179,15 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
-
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+        finish()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        super.onBackPressed()
+    }
 
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA

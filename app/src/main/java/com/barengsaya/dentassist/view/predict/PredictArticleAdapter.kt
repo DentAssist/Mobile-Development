@@ -1,5 +1,7 @@
 package com.barengsaya.dentassist.view.predict
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,8 +16,16 @@ class PredictArticleAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(article: ArticlesItem) {
-            binding.articleTitle.text = article.name ?: ""
-            binding.articleLink.text = article.link ?: ""
+            binding.articleTitle.text = article.name
+            binding.articleLink.text = article.link
+            binding.articleLink.setOnClickListener {
+
+                val url = article.link
+                if (!url.isNullOrEmpty()) {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    it.context.startActivity(intent)
+                }
+            }
         }
     }
 

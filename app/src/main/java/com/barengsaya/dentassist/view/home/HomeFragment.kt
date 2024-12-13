@@ -37,7 +37,6 @@ class HomeFragment : Fragment() {
         setMargins(8, 0, 8, 0)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,23 +51,41 @@ class HomeFragment : Fragment() {
         observeViewModel()
 
         homeViewModel.getSession().observe(viewLifecycleOwner) { user ->
-            binding.progressBar.visibility = View.VISIBLE
             if (user.isLogin) {
                 homeViewModel.fetchUserProfile(user.idUser)
             } else {
                 startActivity(Intent(requireContext(), WelcomeActivity::class.java))
                 activity?.finish()
             }
-        }k
+        }
 
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
             searchView.editText.setOnEditorActionListener { _, _, _ ->
+                val query = searchView.text.toString().lowercase()
                 searchBar.setText(searchView.text)
                 searchView.hide()
-                Toast.makeText(requireContext(), searchView.text, Toast.LENGTH_SHORT).show()
+
+                when {
+                    query.contains("camera") || query.contains("scan") || query.contains("kamera") -> {
+                        startActivity(Intent(requireContext(), CameraActivity::class.java))
+                    }
+                    query.contains("informasi") || query.contains("information") || query.contains("info") -> {
+                        startActivity(Intent(requireContext(), InformasiActivity::class.java))
+                    }
+                    query.contains("klinik") || query.contains("clinic") -> {
+                        startActivity(Intent(requireContext(), ClinikActivity::class.java))
+                    }
+                    query.contains("obat") || query.contains("medicine") || query.contains("produk") || query.contains("produc") -> {
+                        startActivity(Intent(requireContext(), ObatActivity::class.java))
+                    }
+                    else -> {
+                        Toast.makeText(requireContext(), "Pencarian Halaman tidak ditemukan: $query", Toast.LENGTH_SHORT).show()
+                    }
+                }
                 false
             }
+
             btnKlinik.setOnClickListener {
                 startActivity(Intent(requireContext(), ClinikActivity::class.java))
             }
@@ -98,7 +115,6 @@ class HomeFragment : Fragment() {
                     .placeholder(R.drawable.profile_default)
                     .into(binding.userprofile)
             }
-            binding.progressBar.visibility = View.GONE
         }
     }
 
@@ -112,7 +128,6 @@ class HomeFragment : Fragment() {
                 UUID.randomUUID().toString(),
                 getString(R.string.https_res_cloudinary_com_dk0z4ums3_image_upload_v1708999329_attached_image_bentuk_gigi_normal_dan_tips_menjaga_kesehatannya_0_alodokter_jpg)
             ),
-
             ImageItem(
                 UUID.randomUUID().toString(),
                 getString(R.string.https_img_cdn_medkomtek_com_isnmni_jhczvdymt_d2nwov6kv8_730x411_smart_filters_quality_100_format_webp_article_epb6t_faes9wetzvxrmsf_original_030227300_1520847207_berbagai_kondisi_rongga_mulut_yang_tidak_boleh_anda_abaikan_by_irina_bg_shutterstock_jpg_w_128_q_100)

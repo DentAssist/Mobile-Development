@@ -12,7 +12,7 @@ import com.barengsaya.dentassist.data.api.response.PredictionData
 import com.barengsaya.dentassist.databinding.ActivityPredictBinding
 import com.bumptech.glide.Glide
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "NAME_SHADOWING")
 class PredictActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPredictBinding
@@ -21,6 +21,9 @@ class PredictActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPredictBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.backButton.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
         val predictionData = intent.getParcelableExtra<PredictionData>("PREDICT_RESULT")
 
@@ -34,10 +37,23 @@ class PredictActivity : AppCompatActivity() {
                 predictExplanation.text =Html.fromHtml(
                     "<b> Deskripsi: </b> <br><br> ${data.explanation }"
                 )
-
                 predictSuggestion.text = "${data.suggestion }"
 
-
+                titleProduct.text = data.products?.getOrNull(0)?.title?.let {
+                    Html.fromHtml("<b>$it yang mungkin cocok untuk Anda:</b>")
+                } ?: run {
+                    ""
+                }
+                titleArticle.text = data.articles?.getOrNull(0)?.title?.let {
+                    Html.fromHtml("<b>$it terkait dengan penyakit Anda:</b>")
+                } ?: run {
+                    ""
+                }
+                titleClinic.text = data.clinic?.title?.let {
+                    Html.fromHtml("<b>$it mulut yang disarankan untuk Anda:</b>")
+                } ?: run {
+                    ""
+                }
 
                 Glide.with(this@PredictActivity)
                     .load(data.signedUrl)
@@ -47,7 +63,7 @@ class PredictActivity : AppCompatActivity() {
 
                 data.products?.let { products ->
                     binding.recyclerProducts.layoutManager = LinearLayoutManager(this@PredictActivity)
-                    val products = data.products?.filterNotNull() ?: emptyList()
+                    val products = data.products.filterNotNull() ?: emptyList()
                     binding.recyclerProducts.adapter = PredictProductAdapter(products)
 
                 }
@@ -69,13 +85,12 @@ class PredictActivity : AppCompatActivity() {
     }
     @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     override fun onBackPressed() {
-        super.onBackPressed()
-        // Navigate to MainActivity and ensure it opens FragmentHome
         val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        intent.putExtra("NAVIGATE_TO_HOME", true)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
         finish()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        super.onBackPressed()
     }
 
 }

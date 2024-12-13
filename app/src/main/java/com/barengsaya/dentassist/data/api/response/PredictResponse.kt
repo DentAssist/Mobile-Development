@@ -29,6 +29,9 @@ data class ProductsItem(
 	@field:SerializedName("dosis")
 	val dosis: String? = null,
 
+	@field:SerializedName("title")
+	val title: String? = null,
+
 	@field:SerializedName("name")
 	val name: String? = null,
 
@@ -47,6 +50,9 @@ data class ArticlesItem(
 
 	@field:SerializedName("link")
 	val link: String? = null,
+
+	@field:SerializedName("title")
+	val title: String? = null,
 
 	@field:SerializedName("name")
 	val name: String? = null
@@ -100,6 +106,9 @@ data class Clinic(
 
 	@field:SerializedName("link_maps")
 	val linkMaps: String? = null,
+
+	@field:SerializedName("title")
+	val title: String? = null,
 
 	@field:SerializedName("name")
 	val name: String? = null,

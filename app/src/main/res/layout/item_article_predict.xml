@@ -10,7 +10,7 @@
         android:id="@+id/articleTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Article Title"
+        android:text=""
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -18,7 +18,7 @@
         android:id="@+id/articleLink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="https://example.com"
+        android:text=""
         android:textSize="14sp"
         android:textColor="@android:color/holo_blue_dark" />
 </LinearLayout>
