@@ -5,19 +5,31 @@
     <string name="title_history">History</string>
     <string name="title_profile">Profile</string>
 
-    <string name="message_login_page">Selamat Datang Kembali 👋 </string>
     <string name="message_main_page">Selamat Datang.</string>
     <string name="punyaAkun">"Punya Akun? <b>Masuk</b>"</string>
     <string name="email">Email</string>
-    <string name="deskripsi_login_message">Ayo Segera Isi Datamu, dan Segera Cari tau Masalah Pada Mulutmu! 😊</string>
+    <string name="deskripsi_login_message">Selamat Datang Kembali👋</string>
     <string name="masukkan_email">Masukkan Email...</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="masukkan_password">Masukkan Password...</string>
     <string name="signup">Signup</string>
-    <string name="title_signup_page">Please complete your data 😊</string>
+    <string name="title_signup_page">Silahkan Isi Data Kamu😊</string>
     <string name="name">Name</string>
     <string name="masukkan_nama">Masukkan Nama...</string>
     <string name="C">© Bangkit Academy | C242-PS360</string>
+    <string name="user">"Hallo <b>Taufiq</b>"</string>
+    <string name="akurasi_label">Akurasi</string>
+    <string name="persen">%d%%</string>
+
+    <string name="password_error">Password must not be less than 8 characters</string>
+    <string name="email_error">Invalid email format</string>
+
+    <string name="searchbar_hint">Cari Sesuatu...</string>
+    <string name="https_img_antaranews_com_cache_1200x800_2018_11_kunir_jpg_webp">https://img.antaranews.com/cache/1200x800/2018/11/kunir.jpg.webp</string>
+    <string name="https_res_cloudinary_com_dk0z4ums3_image_upload_v1708999329_attached_image_bentuk_gigi_normal_dan_tips_menjaga_kesehatannya_0_alodokter_jpg">https://res.cloudinary.com/dk0z4ums3/image/upload/v1708999329/attached_image/bentuk-gigi-normal-dan-tips-menjaga-kesehatannya-0-alodokter.jpg</string>
+    <string name="https_img_cdn_medkomtek_com_isnmni_jhczvdymt_d2nwov6kv8_730x411_smart_filters_quality_100_format_webp_article_epb6t_faes9wetzvxrmsf_original_030227300_1520847207_berbagai_kondisi_rongga_mulut_yang_tidak_boleh_anda_abaikan_by_irina_bg_shutterstock_jpg_w_128_q_100"><![CDATA[https://img-cdn.medkomtek.com/iSnmnI_jHczVDymt_d2NWoV6Kv8=/730x411/smart/filters:quality(100):format(webp)/article/epb6T_FAeS9wetzvXrMsf/original/030227300_1520847207-Berbagai-Kondisi-Rongga-Mulut-yang-Tidak-Boleh-Anda-Abaikan-By-Irina-Bg-shutterstock.jpg?w=128&q=100]]></string>
+    <string name="username">%s!</string>
+
 
 </resources>

@@ -1,0 +1,147 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/layoutTopAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/back_button"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back_button"
+            app:title="Hasil Prediksi"
+            app:titleCentered="true" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <View
+        android:id="@+id/garis"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/material_on_surface_stroke"
+        app:layout_constraintTop_toBottomOf="@id/layoutTopAppBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layoutTopAppBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/predict_image"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="50dp"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_preview"
+                android:contentDescription="Predict Image"
+                android:background="@drawable/radius_image"/>
+
+            <TextView
+                android:id="@+id/predict_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold"
+                android:text=""
+                android:textSize="18sp"
+                android:layout_marginHorizontal="3dp"/>
+
+            <TextView
+                android:id="@+id/predict_confidence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="3dp"
+                android:text="Confidence Score"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/predict_explanation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="3dp"
+                android:text="Explanation: N/A"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/predict_suggestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="3dp"
+                android:text="Suggestion: N/A"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/title_clinic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="3dp"
+                android:text="Klinik mulut yang disarankan untuk Anda:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerClinics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/title_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="3dp"
+                android:text="Produk yang mungkin cocok untuk Anda:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                />
+
+            <TextView
+                android:id="@+id/predict_suggest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="3dp"
+                android:text="Artikel terkait dengan penyakit Anda:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerArticles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

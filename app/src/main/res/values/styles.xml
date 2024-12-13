@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SearchViewTheme" parent="Theme.AppCompat.Light">
+        <item name="android:textColorHint">@color/black</item>
+    </style>
+    <style name="DotTabStyle" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabBackground">@drawable/titik_indikator</item>
+        <item name="tabMaxWidth">10dp</item>
+        <item name="tabMinWidth">10dp</item>
+        <item name="tabPaddingStart">5dp</item>
+        <item name="tabPaddingEnd">5dp</item>
+    </style>
+</resources>
